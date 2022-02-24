@@ -1,0 +1,124 @@
+drop table if exists #a
+create table #a
+(
+[PDR PRODUCT ID] varchar (5),
+CARRIER_ID varchar (5),
+provider_id varchar (50),
+claim_type varchar (4),
+[cpt code] varchar (10),
+Billed decimal (26,10),
+Maximum decimal (26,10),
+Minimum decimal (26,10),
+Diff decimal (26,10)
+
+)
+
+
+
+
+Declare @schema_name varchar (10),
+@sql nvarchar (max),
+@sql_drop nvarchar(max),
+@carrier_group_code varchar(25),
+@chp_carrier_id varchar (10)
+
+
+
+
+
+Declare cur_schema cursor for
+select [schema_name], chp_carrier_id from xClaims.process.data_status_tracking 
+where plan_status='Active'
+and pdr_product_id not in ('nyb5', 'nyb6', 'cal3', 'cak6', 'ncba', 'ncb3')
+
+
+
+Open cur_schema
+fetch next from cur_schema into @schema_name, @chp_carrier_id
+while @@FETCH_STATUS =0
+begin
+
+
+
+set @sql ='insert into #a 
+select [pdr product id]
+      , carrier_id
+	  --,b.Provider_id
+	  ,[PROVIDER ID] as provider_id
+	  ,b.claim_type
+	  ,[cpt code]
+	  ,sum([Billed Amount]) as Billed
+	  ,max([Billed Amount]) as maximum
+	  ,min([Billed Amount]) as minimum
+	  ,max([Billed Amount]) - min([Billed Amount]) as diff
+
+from '+@schema_name+'.traceability_claims
+
+cross apply ( select  
+	case  [CLAIM TYPE] when ''2'' then ''OP''
+						when ''3'' then ''Prof''
+						when ''4'' then ''OP'' 
+						else '''' end  as claim_type
+	
+		) b
+where [claim type] in (''2'',''4'',''3'')
+and [EXCLUSION FLAG (Y = EXCLUDE)]=''n''
+--and [MEMBERSHIP EXCLUSION FLAG (Y = EXCLUDE)]=''n''
+AND [CPT CODE] IS NOT  NULL
+AND LEN([CPT CODE]) <>0
+--and MEMBERSHIP_home_hosted_indicator=''home''
+--and [BENEFIT PAYMENT CONTRACT STATUS] in (''OX'', ''OC'')
+group by [pdr product id]
+      , carrier_id
+	  ,[PROVIDER ID]
+	  --,b.Provider_id
+	  ,[cpt code]
+	  ,b.claim_type
+
+
+'
+
+print (@sql)
+exec(@sql)
+fetch next from cur_schema into @schema_name, @chp_carrier_id
+end
+
+close cur_schema
+deallocate cur_schema
+
+
+					--,
+
+	 --provider_id='    
+  --        + CHAR(13)+CHAR(10)+
+  --        case when @chp_carrier_id in ('928', '957', '887','915', '918', '924','940') then '[BILLING PROVIDER ID]' 
+  --             when @chp_carrier_id in ('893') then '[NATIONAL PROVIDER ID]' 
+  --              when @chp_carrier_id in ('888', '909', '922','895','896','890','921','886','954','900','930', '914','938','907') then '[PROVIDER TAX ID]'
+  --          --when @chp_carrier_id in ('947') then 'cast(L.[NPI Billing Provider ID] as varchar(50))'
+  --        else '[Provider ID]' end
+  --        + CHAR(13)+CHAR(10)+     
+  --'
+
+
+  --Results
+SELECT 
+[PDR PRODUCT ID]
+,CARRIER_ID
+,[OP <=100]/TOT_OP  AS [% OP <= 100]
+,[PROF <=100]/TOT_PROF AS [% PROF <= 100]
+
+FROM 
+(
+select
+[PDR PRODUCT ID]
+,CARRIER_ID
+, cast (SUM(case when claim_type='OP' THEN 1 ELSE 0 END) as float) AS TOT_OP
+, cast (SUM(case when claim_type='PROF' THEN 1 ELSE 0 END) as float) AS TOT_PROF
+, cast (SUM (case when diff<=100 and claim_type='OP' then 1 ELSE 0 END)as float)  AS [OP <=100] 
+, cast(SUM (case when diff<=100 and claim_type='PROF' then 1 ELSE 0 END) as float)  AS [PROF <=100] 
+
+from #a
+where [PDR PRODUCT ID] <> 'mob1'
+GROUP BY
+[PDR PRODUCT ID]
+,CARRIER_ID)A
