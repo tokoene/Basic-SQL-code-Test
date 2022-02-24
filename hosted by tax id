@@ -1,0 +1,433 @@
+DROP TABLE IF EXISTS #HOSTED
+CREATE TABLE #Hosted
+(
+	[BCBSA PLAN ID] [varchar](50) NULL,
+	[PDR PRODUCT ID] [varchar](50) NULL,
+	[PDR PRODUCT TYPE CODE] [varchar](50) NULL,
+	[PRODUCT_NETWORK] [varchar](255) NULL,
+	[CARRIER_ID] [varchar](5) NULL,
+	[PC_ID] [varchar](5) NULL,
+	[VQ_YEAR] [varchar](4) NULL,
+	[UPLOAD] [varchar](5) NULL,
+	[ROW NUMBER] [bigint] NULL,
+	[EXCLUSION FLAG (Y = EXCLUDE)] [varchar](1) NULL,
+	[EXCLUSION CODE] [int] NULL,
+	[RECORD CHANGE TYPE] [varchar](50) NULL,
+	[YEAR MONTH] [varchar](7) NULL,
+	[CLAIM TYPE] [int] NULL,
+	[PLACE OF SERVICE] [int] NULL,
+	[WELL NEWBORN FLAG] [varchar](1) NULL,
+	[EXPANDED CLAIM TYPE] [int] NULL,
+	[EXPANDED PLACE OF SERVICE] [tinyint] NULL,
+	[EXPANDED UTILIZATION TYPE] [varchar](50) NULL,
+	[3DIGIT ZIP CODE] [varchar](3) NULL,
+	[ZIP CODE] [varchar](10) NULL,
+	[SERVICE CATEGORY] [varchar](10) NULL,
+	[SERVICE CATEGORY DESCRIPTION] [varchar](255) NULL,
+	[EXPANDED SERVICE CATEGORY] [varchar](10) NULL,
+	[EXPANDED SERVICE CATEGORY DESCRIPTION] [varchar](255) NULL,
+	[ORPHAN CLAIMS FLAG] [varchar](1) NULL,
+	[DRG CODE] [varchar](5) NULL,
+	[DRG VERSION] [varchar](5) NULL,
+	[MDC CODE] [varchar](5) NULL,
+	[CPT CODE] [varchar](10) NULL,
+	[CPT MODIFIER CODE] [varchar](5) NULL,
+	[PRIMARY ICD PROCEDURE CODE] [varchar](10) NULL,
+	[PRIMARY DIAGNOSIS CODE] [varchar](10) NULL,
+	[REVENUE CODE] [int] NULL,
+	[PROVIDER NETWORK INDICATOR] [varchar](1) NULL,
+	[PROVIDER CONTRACTING STATUS] [varchar](1) NULL,
+	[PROVIDER NETWORK STATUS] [varchar](1) NULL,
+	[BENEFIT PAYMENT CONTRACT STATUS] [varchar](5) NULL,
+	[CAPITATION FLAG] [varchar](5) NULL,
+	[CATASTROPHIC INDICATOR] [varchar](1) NULL,
+	[CATASTROPHIC CODE] [varchar](5) NULL,
+	[SUBMITTED AMOUNT] [decimal](26, 10) NULL,
+	[BILLED AMOUNT] [decimal](26, 10) NULL,
+	[ADJUSTED BILLED AMOUNT] [decimal](26, 10) NULL,
+	[ADJUSTED ALLOWED AMOUNT] [decimal](26, 10) NULL,
+	[ALLOWED AMOUNT] [decimal](26, 10) NULL,
+	[PROJECTED ALLOWED AMOUNT] [decimal](26, 10) NULL,
+	[PAID AMOUNT] [decimal](26, 10) NULL,
+	[COB AMOUNT] [decimal](26, 10) NULL,
+	[WITHHOLD AMOUNT] [decimal](26, 10) NULL,
+	[NON-COVERED AMOUNT] [int] NULL,
+	[COPAYMENT AMOUNT] [decimal](26, 10) NULL,
+	[COINSURANCE AMOUNT] [decimal](26, 10) NULL,
+	[DEDUCTIBLE AMOUNT] [decimal](26, 10) NULL,
+	[UCR AMOUNT] [decimal](26, 10) NULL,
+	[CLIENT BILLED AMOUNT] [decimal](26, 10) NULL,
+	[CLIENT ADJUSTED ALLOWED AMOUNT] [decimal](26, 10) NULL,
+	[CLIENT ALLOWED AMOUNT] [decimal](26, 10) NULL,
+	[CLIENT UNITS UTILIZATION] [bigint] NULL,
+	[ADMITS] [int] NULL,
+	[EXPANDED ADMITS] [int] NULL,
+	[INPATIENT DAYS] [bigint] NULL,
+	[COST MODEL UTILIZATION] [bigint] NULL,
+	[EXPANDED UTILIZATION] [int] NULL,
+	[UTILIZATION WO EXCLUSION] [bigint] NULL,
+	[UNITS UTILIZATION] [bigint] NULL,
+	[CPT ROW BASED UTILIZATION] [bigint] NULL,
+	[CPT UNITS BASED UTILIZATION] [bigint] NULL,
+	[CLIENT ADMITS] [int] NULL,
+	[CLIENT INPATIENT DAYS] [bigint] NULL,
+	[PRESENT ON ADMISSION INDICATOR] [varchar](1) NULL,
+	[MEMBER ID] [varchar](512) NULL,
+	[MEMBER CONTRACT ID] [varchar](50) NULL,
+	[MEMBER GENDER] [varchar](4) NULL,
+	[MEMBER AGE] [int] NULL,
+	[MEMBER AGE BAND] [varchar](10) NULL,
+	[MEMBER RELATIONSHIP CODE] [varchar](4) NULL,
+	[MEMBER AGE GENDER RELATION CODE] [int] NULL,
+	[MEMBER ELIGIBILITY STATUS] [varchar](4) NULL,
+	[MEMBER FUNDING ARRANGEMENTS] [varchar](4) NULL,
+	[MINI-MED PLAN INDICATOR] [varchar](50) NULL,
+	[HOSPITAL ONLY PLAN INDICATOR] [varchar](50) NULL,
+	[PROFESSIONAL ONLY PLAN INDICATOR] [varchar](50) NULL,
+	[MEDICAL COVERAGE INDICATOR] [varchar](50) NULL,
+	[PHARMACY COVERAGE INDICATOR] [varchar](50) NULL,
+	[MH CD COVERAGE INDICATOR] [varchar](50) NULL,
+	[REIMBURSEMENT TYPE CODE] [varchar](50) NULL,
+	[PLAN DEDUCTIBLE BAND] [varchar](4) NULL,
+	[CLIENT CLAIM TYPE CODE] [varchar](10) NULL,
+	[CLIENT PLACE OF SERVICE CODE] [varchar](20) NULL,
+	[CLIENT TYPE OF SERVICE CODE] [varchar](50) NULL,
+	[CLIENT ZIP CODE] [varchar](10) NULL,
+	[CLIENT CLAIM NUMBER] [varchar](50) NULL,
+	[CLAIM LINE NUMBER] [varchar](5) NULL,
+	[CLIENT DISCHARGE STATUS] [varchar](50) NULL,
+	[CLIENT REASON ADJUSTMENT CODE] [varchar](10) NULL,
+	[CLIENT DATE OF SERVICE] [date] NULL,
+	[CLIENT ADMIT DATE] [date] NULL,
+	[CLIENT DISCHARGE DATE] [date] NULL,
+	[CLIENT PAID DATE] [date] NULL,
+	[PAY AS BILLED INDICATOR] [varchar](50) NULL,
+	[NEGOTIATED DISCOUNT FLAG] [varchar](5) NULL,
+	[HOLD HARMLESS FLAG] [varchar](5) NULL,
+	[UCR FLAG] [varchar](1) NULL,
+	[CLIENT ASSIGNED DRG] [int] NULL,
+	[CLIENT ASSIGNED DRG VERSION] [varchar](5) NULL,
+	[DIAGNOSIS CODE 1] [varchar](10) NULL,
+	[DIAGNOSIS CODE 2] [varchar](10) NULL,
+	[DIAGNOSIS CODE 3] [varchar](10) NULL,
+	[ICD PROCEDURE CODE 1] [varchar](10) NULL,
+	[ICD PROCEDURE CODE 2] [varchar](10) NULL,
+	[ICD PROCEDURE CODE 3] [varchar](10) NULL,
+	[NAICS CODE] [varchar](10) NULL,
+	[SIC CODE] [varchar](10) NULL,
+	[HOST PLAN ID] [varchar](50) NULL,
+	[GROUP ID] [varchar](50) NULL,
+	[GROUP NAME] [varchar](300) NULL,
+	[ACCOUNT ID] [varchar](50) NULL,
+	[SUBGROUP] [varchar](50) NULL,
+	[EMPLOYER GROUP SIZE BAND] [varchar](4) NULL,
+	[STANDARD CLAIMS COLLECTION FACILITY] [varchar](50) NULL,
+	[DELIVERY METHOD] [varchar](50) NULL,
+	[APG CODE] [varchar](50) NULL,
+	[PROVIDER ZIP] [varchar](10) NULL,
+	[PROVIDER ID] [varchar](50) NULL,
+	[PROVIDER TAX ID] [varchar](50) NULL,
+	[PROVIDER MEDICARE ID] [varchar](50) NULL,
+	[NATIONAL PROVIDER ID] [varchar](50) NULL,
+	[ITS PROVIDER] [varchar](1) NULL,
+	[CLIENT PROVIDER TYPE CODE] [varchar](50) NULL,
+	[CLIENT PROVIDER SPECIALTY CODE] [varchar](50) NULL,
+	[PROVIDER TYPE] [varchar](50) NULL,
+	[RENDERING PROVIDER ID] [varchar](50) NULL,
+	[BILLING PROVIDER ID] [varchar](50) NULL,
+	[PROVIDER FIRST NAME] [varchar](300) NULL,
+	[PROVIDER LAST NAME] [varchar](256) NULL,
+	[RENDERING PROVIDER PRODUCT ID – PDR] [varchar](50) NULL,
+	[CLASSIFICATION OF PROVIDER] [varchar](50) NULL,
+	[CLIENT PROVIDER DATA SOURCE] [varchar](50) NULL,
+	[PRODUCT ID] [varchar](50) NULL,
+	[PRODUCT TYPE] [varchar](50) NULL,
+	[PRODUCT NAME] [varchar](256) NULL,
+	[NETWORK ID] [varchar](100) NULL,
+	[NETWORK NAME] [varchar](300) NULL,
+	[CLIENT PROVIDER NETWORK INDICATOR] [varchar](1) NULL,
+	[CLIENT PROVIDER CONTRACTING STATUS] [varchar](1) NULL,
+	[CLIENT PROVIDER NETWORK STATUS] [varchar](1) NULL,
+	[ADJUSTED PAID AMOUNT] [decimal](26, 10) NULL,
+	[INELIGIBLE NON COVERED AMOUNT] [decimal](26, 10) NULL,
+	[ORIGINAL CLAIM NUMBER] [varchar](50) NULL,
+	[ORIGINAL MEMBER ID] [varchar](50) NULL,
+	[ORIGINAL DATE OF SERVICE] [date] NULL,
+	[ORIGINAL ADMIT DATE] [date] NULL,
+	[ADJUSTED ALLOWED AMOUNT V2] [decimal](26, 10) NULL,
+	[ADJUSTED BILLED AMOUNT V2] [decimal](26, 10) NULL,
+	[VENDOR CODE] [varchar](50) NULL,
+	[PROVIDER COUNTRY CODE] [varchar](50) NULL,
+	[MEMBER COUNTRY CODE] [varchar](50) NULL,
+	[R&C CUTBACK AMOUNT] [decimal](26, 10) NULL,
+	[OTHER PROVIDER PAYMENT DIRECT] [decimal](26, 10) NULL,
+	[OTHER PROVIDER PAYMENT INDIRECT] [decimal](26, 10) NULL,
+	[CLAIMS STATUS] [varchar](50) NULL,
+	[COB INDICATOR] [varchar](50) NULL,
+	[CUSTOM NETWORK INDICATOR] [varchar](50) NULL,
+	[OON VENDOR CODE] [varchar](50) NULL,
+	[COB PRIMARY INDICATOR] [varchar](50) NULL,
+	[COVID INDICATOR] [varchar](10) NULL,
+	[VIRTUAL INDICATOR] [varchar](10) NULL,
+	[MEMBERSHIP EXCLUSION FLAG (Y = EXCLUDE)] [varchar](1) NULL,
+	[MEMBERSHIP EXCLUSION CODE] [int] NULL,
+	[MEMBERSHIP_home_hosted_indicator] [varchar](10) NULL,
+	[MEMBERSHIP AGE BAND] [varchar](255) NULL,
+	[MEMBERSHIP GENDER] [varchar](255) NULL,
+	[MEMBERSHIP SIC CODE] [varchar](255) NULL,
+	[MEMBERSHIP NAICS CODE] [varchar](255) NULL,
+	[MEMBERSHIP FUNDING ARRANGEMENTS] [varchar](255) NULL,
+	[MEMBERSHIP RELATIONSHIP CODE] [varchar](255) NULL,
+	[CLIENT DATE OF SERVICE CONFORMED] [datetime] NOT NULL,
+	[CLIENT DISCHARGE DATE CONFORMED] [datetime] NOT NULL,
+	[CLIENT ADMIT DATE CONFORMED] [datetime] NOT NULL,
+	[CLIENT PAID DATE CONFORMED] [datetime] NOT NULL,
+	[MEMBERSHIP CLIENT ZIP CODE CONFORMED] [varchar](10) NULL,
+	[MEMBERSHIP 3DIGIT ZIP CODE CONFORMED] [varchar](3) NULL,
+	
+) 
+
+
+
+Declare @schema_name varchar (10),
+@sql nvarchar (max),
+@sql_drop nvarchar(max),
+@carrier_group_code varchar(25)
+
+
+
+
+
+Declare cur_schema cursor for
+select [schema_name], carrier_group_code from xClaims.process.data_status_tracking 
+where plan_status='Active'
+and carrier_group_code in (656,659,677,699,705)
+and pdr_product_id not in ('txdt', 'okl8', 'okl3','ill8', 'ill2', 'TNL2','FLL2', 'FL1C', 'MNT7','ID1P','MOB1')
+and chp_carrier_id not in ('1395')
+--and carrier_group_code=699
+
+
+Open cur_schema
+fetch next from cur_schema into @schema_name, @carrier_group_code
+while @@FETCH_STATUS =0
+begin
+
+
+set @sql='insert into #hosted
+SELECT  [BCBSA PLAN ID]
+      ,[PDR PRODUCT ID]
+      ,[PDR PRODUCT TYPE CODE]
+      ,[PRODUCT_NETWORK]
+      ,[CARRIER_ID]
+      ,[PC_ID]
+      ,[VQ_YEAR]
+      ,[UPLOAD]
+      ,[ROW NUMBER]
+      ,[EXCLUSION FLAG (Y = EXCLUDE)]
+      ,[EXCLUSION CODE]
+      ,[RECORD CHANGE TYPE]
+      ,[YEAR MONTH]
+      ,[CLAIM TYPE]
+      ,[PLACE OF SERVICE]
+      ,[WELL NEWBORN FLAG]
+      ,[EXPANDED CLAIM TYPE]
+      ,[EXPANDED PLACE OF SERVICE]
+      ,[EXPANDED UTILIZATION TYPE]
+      ,[3DIGIT ZIP CODE]
+      ,[ZIP CODE]
+      ,[SERVICE CATEGORY]
+      ,[SERVICE CATEGORY DESCRIPTION]
+      ,[EXPANDED SERVICE CATEGORY]
+      ,[EXPANDED SERVICE CATEGORY DESCRIPTION]
+      ,[ORPHAN CLAIMS FLAG]
+      ,[DRG CODE]
+      ,[DRG VERSION]
+      ,[MDC CODE]
+      ,[CPT CODE]
+      ,[CPT MODIFIER CODE]
+      ,[PRIMARY ICD PROCEDURE CODE]
+      ,[PRIMARY DIAGNOSIS CODE]
+      ,[REVENUE CODE]
+      ,[PROVIDER NETWORK INDICATOR]
+      ,[PROVIDER CONTRACTING STATUS]
+      ,[PROVIDER NETWORK STATUS]
+      ,[BENEFIT PAYMENT CONTRACT STATUS]
+      ,[CAPITATION FLAG]
+      ,[CATASTROPHIC INDICATOR]
+      ,[CATASTROPHIC CODE]
+      ,[SUBMITTED AMOUNT]
+      ,[BILLED AMOUNT]
+      ,[ADJUSTED BILLED AMOUNT]
+      ,[ADJUSTED ALLOWED AMOUNT]
+      ,[ALLOWED AMOUNT]
+      ,[PROJECTED ALLOWED AMOUNT]
+      ,[PAID AMOUNT]
+      ,[COB AMOUNT]
+      ,[WITHHOLD AMOUNT]
+      ,[NON-COVERED AMOUNT]
+      ,[COPAYMENT AMOUNT]
+      ,[COINSURANCE AMOUNT]
+      ,[DEDUCTIBLE AMOUNT]
+      ,[UCR AMOUNT]
+      ,[CLIENT BILLED AMOUNT]
+      ,[CLIENT ADJUSTED ALLOWED AMOUNT]
+      ,[CLIENT ALLOWED AMOUNT]
+      ,[CLIENT UNITS UTILIZATION]
+      ,[ADMITS]
+      ,[EXPANDED ADMITS]
+      ,[INPATIENT DAYS]
+      ,[COST MODEL UTILIZATION]
+      ,[EXPANDED UTILIZATION]
+      ,[UTILIZATION WO EXCLUSION]
+      ,[UNITS UTILIZATION]
+      ,[CPT ROW BASED UTILIZATION]
+      ,[CPT UNITS BASED UTILIZATION]
+      ,[CLIENT ADMITS]
+      ,[CLIENT INPATIENT DAYS]
+      ,[PRESENT ON ADMISSION INDICATOR]
+      ,[MEMBER ID]
+      ,[MEMBER CONTRACT ID]
+      ,[MEMBER GENDER]
+      ,[MEMBER AGE]
+      ,[MEMBER AGE BAND]
+      ,[MEMBER RELATIONSHIP CODE]
+      ,[MEMBER AGE GENDER RELATION CODE]
+      ,[MEMBER ELIGIBILITY STATUS]
+      ,[MEMBER FUNDING ARRANGEMENTS]
+      ,[MINI-MED PLAN INDICATOR]
+      ,[HOSPITAL ONLY PLAN INDICATOR]
+      ,[PROFESSIONAL ONLY PLAN INDICATOR]
+      ,[MEDICAL COVERAGE INDICATOR]
+      ,[PHARMACY COVERAGE INDICATOR]
+      ,[MH CD COVERAGE INDICATOR]
+      ,[REIMBURSEMENT TYPE CODE]
+      ,[PLAN DEDUCTIBLE BAND]
+      ,[CLIENT CLAIM TYPE CODE]
+      ,[CLIENT PLACE OF SERVICE CODE]
+      ,[CLIENT TYPE OF SERVICE CODE]
+      ,[CLIENT ZIP CODE]
+      ,[CLIENT CLAIM NUMBER]
+      ,[CLAIM LINE NUMBER]
+      ,[CLIENT DISCHARGE STATUS]
+      ,[CLIENT REASON ADJUSTMENT CODE]
+      ,[CLIENT DATE OF SERVICE]
+      ,[CLIENT ADMIT DATE]
+      ,[CLIENT DISCHARGE DATE]
+      ,[CLIENT PAID DATE]
+      ,[PAY AS BILLED INDICATOR]
+      ,[NEGOTIATED DISCOUNT FLAG]
+      ,[HOLD HARMLESS FLAG]
+      ,[UCR FLAG]
+      ,[CLIENT ASSIGNED DRG]
+      ,[CLIENT ASSIGNED DRG VERSION]
+      ,[DIAGNOSIS CODE 1]
+      ,[DIAGNOSIS CODE 2]
+      ,[DIAGNOSIS CODE 3]
+      ,[ICD PROCEDURE CODE 1]
+      ,[ICD PROCEDURE CODE 2]
+      ,[ICD PROCEDURE CODE 3]
+      ,[NAICS CODE]
+      ,[SIC CODE]
+      ,[HOST PLAN ID]
+      ,[GROUP ID]
+      ,[GROUP NAME]
+      ,[ACCOUNT ID]
+      ,[SUBGROUP]
+      ,[EMPLOYER GROUP SIZE BAND]
+      ,[STANDARD CLAIMS COLLECTION FACILITY]
+      ,[DELIVERY METHOD]
+      ,[APG CODE]
+      ,[PROVIDER ZIP]
+      ,[PROVIDER ID]
+      ,E.[PROVIDER TAX ID]
+      ,[PROVIDER MEDICARE ID]
+      ,[NATIONAL PROVIDER ID]
+      ,[ITS PROVIDER]
+      ,[CLIENT PROVIDER TYPE CODE]
+      ,[CLIENT PROVIDER SPECIALTY CODE]
+      ,[PROVIDER TYPE]
+      ,A.[RENDERING PROVIDER ID]
+      ,A.[BILLING PROVIDER ID]
+      ,[PROVIDER FIRST NAME]
+      ,[PROVIDER LAST NAME]
+      ,[RENDERING PROVIDER PRODUCT ID – PDR]
+      ,[CLASSIFICATION OF PROVIDER]
+      ,[CLIENT PROVIDER DATA SOURCE]
+      ,[PRODUCT ID]
+      ,[PRODUCT TYPE]
+      ,[PRODUCT NAME]
+      ,[NETWORK ID]
+      ,[NETWORK NAME]
+      ,[CLIENT PROVIDER NETWORK INDICATOR]
+      ,[CLIENT PROVIDER CONTRACTING STATUS]
+      ,[CLIENT PROVIDER NETWORK STATUS]
+      ,[ADJUSTED PAID AMOUNT]
+      ,[INELIGIBLE NON COVERED AMOUNT]
+      ,[ORIGINAL CLAIM NUMBER]
+      ,[ORIGINAL MEMBER ID]
+      ,[ORIGINAL DATE OF SERVICE]
+      ,[ORIGINAL ADMIT DATE]
+      ,[ADJUSTED ALLOWED AMOUNT V2]
+      ,[ADJUSTED BILLED AMOUNT V2]
+      ,[VENDOR CODE]
+      ,[PROVIDER COUNTRY CODE]
+      ,[MEMBER COUNTRY CODE]
+      ,[R&C CUTBACK AMOUNT]
+      ,[OTHER PROVIDER PAYMENT DIRECT]
+      ,[OTHER PROVIDER PAYMENT INDIRECT]
+      ,[CLAIMS STATUS]
+      ,[COB INDICATOR]
+      ,[CUSTOM NETWORK INDICATOR]
+      ,[OON VENDOR CODE]
+      ,[COB PRIMARY INDICATOR]
+      ,[COVID INDICATOR]
+      ,[VIRTUAL INDICATOR]
+      ,[MEMBERSHIP EXCLUSION FLAG (Y = EXCLUDE)]
+      ,[MEMBERSHIP EXCLUSION CODE]
+      ,[MEMBERSHIP_home_hosted_indicator]
+      ,[MEMBERSHIP AGE BAND]
+      ,[MEMBERSHIP GENDER]
+      ,[MEMBERSHIP SIC CODE]
+      ,[MEMBERSHIP NAICS CODE]
+      ,[MEMBERSHIP FUNDING ARRANGEMENTS]
+      ,[MEMBERSHIP RELATIONSHIP CODE]
+      ,[CLIENT DATE OF SERVICE CONFORMED]
+      ,[CLIENT DISCHARGE DATE CONFORMED]
+      ,[CLIENT ADMIT DATE CONFORMED]
+      ,[CLIENT PAID DATE CONFORMED]
+      ,[MEMBERSHIP CLIENT ZIP CODE CONFORMED]
+      ,[MEMBERSHIP 3DIGIT ZIP CODE CONFORMED]
+      
+from xclaims_2020cy.'+@schema_name+'.traceability_claims_table a '+char(10)+char(13)+
+case when @carrier_group_code=677 then 'join xclaims_2020cy.'+@schema_name+'.load_raw_claims b
+on a.[ROW NUMBER]=b.chp_row_id'
+ when @carrier_group_code=699 then  'join xclaims_2020cy.'+@schema_name+'.load_raw_claims c
+on a.[ROW NUMBER]=c.chp_row_id'
+ when @carrier_group_code=705 then  'join xclaims_2020cy.'+@schema_name+'.load_raw_claims d
+on a.[ROW NUMBER]=d.chp_row_id' 
+else '' end +char(10)+char(13)+
+
+'cross apply ( select [provider tax id] ='+char(10)+char(13)+
+                case when @carrier_group_code in (656,659,686,668,695) then 'a.[provider tax id]'
+				     when @carrier_group_code = 677 then 'b.prov_tax_id'
+					 when @carrier_group_code = 699 then 'c.BillngProvTaxID'
+					 when @carrier_group_code = 705 then 'd.BVND_PRV_TAX_ID'
+					 else '' end +char(10)+char(13)+
+')E
+
+where MEMBERSHIP_home_hosted_indicator=''hosted''
+and [3DIGIT ZIP CODE] in (select zip3 from reference.ref_vqe_plan_prod_service_area_zip3 where pdr_product_id=''azb1'')
+and a.[CLAIM TYPE] in (''2'',''3'',''4'')
+
+
+'
+--SELECT CAST('<root><![CDATA[' + @SQL + ']]></root>' AS XML)
+
+exec(@sql)
+fetch next from cur_schema into @schema_name, @carrier_group_code
+end
+
+
+
+close cur_schema
+deallocate cur_schema
